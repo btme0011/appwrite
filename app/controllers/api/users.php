@@ -43,6 +43,7 @@ use Appwrite\Auth\Validator\PersonalData;
 /** TODO: Remove function when we move to using utopia/platform */
 function createUser(string $hash, mixed $hashOptions, string $userId, ?string $email, ?string $password, ?string $phone, string $name, Document $project, Database $dbForProject, Event $events): Document
 {
+
     $hashOptionsObject = (\is_string($hashOptions)) ? \json_decode($hashOptions, true) : $hashOptions; // Cast to JSON array
     $passwordHistory = $project->getAttribute('auths', [])['passwordHistory'] ?? 0;
 
@@ -59,6 +60,27 @@ function createUser(string $hash, mixed $hashOptions, string $userId, ?string $e
     }
 
     try {
+        // Validation logic
+        $emailRegex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+        $phoneRegex = '/^[0-9]{10}$/';
+        $passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/';
+
+        if (!isset($name) || strlen($name) < 2) {
+            throw new Exception(Exception::USER_NAME_INVALID);
+        }
+
+        if (!preg_match($emailRegex, $mail)) {
+            throw new Exception(Exception::USER_EMAIL_INVALID);
+        }
+
+        if (!preg_match($phoneRegex, $phone)) {
+            throw new Exception(Exception::USER_PHONE_INVALID);
+        }
+
+        if (!preg_match($passwordRegex, $pass)) {
+            throw new Exception(Exception::USER_PASSWORD_INVALID);
+        }
+
         $userId = $userId == 'unique()'
             ? ID::unique()
             : ID::custom($userId);
