@@ -9,8 +9,8 @@ jobs:
 
     steps:
       - name: Run OCV scanner
-      uses: actions/github-script@v6
-      with:
-        script: |
-          sudo apt install -y osv-scanner
-          osv-scanner scan -r ../../.
+        uses: actions/github-script@v6
+        with:
+          script: |
+            sudo apt install -y osv-scanner
+            osv-scanner scan -r ../../.
