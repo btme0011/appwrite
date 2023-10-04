@@ -1,0 +1,20 @@
+name: OSV Scanner
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install OSV Scanner
+        run: go get github.com/google/osv-scanner/cmd/osv-scanner
+
+      - name: Scan for Vulnerabilities
+        run: osv-scanner scan -r .
+
+      - name: Report Vulnerabilities
+        run: osv-scanner report
