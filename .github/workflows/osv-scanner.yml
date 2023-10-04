@@ -2,6 +2,8 @@ name: OSV Scanner
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -10,8 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+
       - name: Install OSV Scanner
-        run: go get github.com/google/osv-scanner/cmd/osv-scanner
+        run: go install github.com/google/osv-scanner/cmd/osv-scanner@latest
 
       - name: Scan for Vulnerabilities
         run: osv-scanner scan -r .
