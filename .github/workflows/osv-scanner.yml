@@ -1,6 +1,16 @@
-name: Run OCV scanner
-  uses: actions/github-script@v6
-  with:
-    script: |
-      sudo apt install -y osv-scanner
-      osv-scanner scan -r ../../.
+name: OSV Scanner
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run OCV scanner
+      uses: actions/github-script@v6
+      with:
+        script: |
+          sudo apt install -y osv-scanner
+          osv-scanner scan -r ../../.
