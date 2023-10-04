@@ -16,4 +16,3 @@ dev/yasd_init.php
 /composer.lock
 /app/console/*
 /_actions/*
-/.github
