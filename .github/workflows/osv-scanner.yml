@@ -8,9 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run OCV scanner
-        uses: actions/github-script@v6
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
         with:
-          script: |
-            sudo apt install -y osv-scanner
-            osv-scanner scan -r ../../.
+          go-version: 1.19
+
+      - name: Install OSV Scanner
+        run: go install github.com/google/osv-scanner/cmd/osv-scanner@latest
+
+      - name: Scan for Vulnerabilities
+        run: osv-scanner -r ../../.
+
+      - name: Report Vulnerabilities
+        run: osv-scanner report
