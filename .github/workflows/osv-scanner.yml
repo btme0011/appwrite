@@ -12,9 +12,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Scan for Vulnerabilities
+      - name: Install Golang
+        if: steps.checkout.outputs.success()
         run: |
-          docker run --rm -v $PWD:/app composer sh -c \
-          "apk add golang && \
-          go install github.com/google/osv-scanner/cmd/osv-scanner@latest && \
-          osv-scanner -r /app/../../."
+          apk add alpine-keys
+          apk add golang
+
+      - name: Install OSV Scanner
+        if: steps.install-golang.outputs.success()
+        run: |
+          go install github.com/google/osv-scanner/cmd/osv-scanner@latest
+
+      - name: Scan for Vulnerabilities
+        if: steps.install-osv-scanner.outputs.success()
+        run: |
+          osv-scanner -r /app/../../.
