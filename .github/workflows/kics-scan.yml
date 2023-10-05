@@ -16,4 +16,5 @@ jobs:
         with:
           path: .
           changed-only: true
+          verbose: true
 
