@@ -19,11 +19,9 @@ jobs:
 
 
       - name: Install OSV Scanner
-        if: steps.install-golang.outputs.success()
         run: |
           go install github.com/google/osv-scanner/cmd/osv-scanner@latest
 
       - name: Scan for Vulnerabilities
-        if: steps.install-osv-scanner.outputs.success()
         run: |
           osv-scanner -r /app/../../.
