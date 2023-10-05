@@ -15,3 +15,5 @@ jobs:
         uses: Checkmarx/kics-github-action@v1.7.0
         with:
           path: .
+          changed-only: true
+
