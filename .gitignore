@@ -13,6 +13,3 @@ debug/
 app/sdks
 dev/yasd_init.php
 .phpunit.result.cache
-/composer.lock
-/app/console/*
-/_actions/*
