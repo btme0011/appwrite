@@ -18,6 +18,7 @@ jobs:
           apk add alpine-keys
           apk add golang
 
+
       - name: Install OSV Scanner
         if: steps.install-golang.outputs.success()
         run: |
