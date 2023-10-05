@@ -13,9 +13,9 @@ jobs:
           fetch-depth: 0
 
       - name: Install Golang
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y golang
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19.1
 
 
       - name: Install OSV Scanner
