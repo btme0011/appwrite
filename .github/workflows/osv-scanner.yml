@@ -24,4 +24,4 @@ jobs:
 
       - name: Scan for Vulnerabilities
         run: |
-          osv-scanner -r /app/../../.
+          osv-scanner -r ../../.
