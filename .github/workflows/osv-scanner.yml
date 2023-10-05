@@ -13,7 +13,6 @@ jobs:
           fetch-depth: 0
 
       - name: Install Golang
-        if: steps.checkout.outputs.success()
         run: |
           apk add alpine-keys
           apk add golang
