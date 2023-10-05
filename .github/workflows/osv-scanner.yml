@@ -14,8 +14,8 @@ jobs:
 
       - name: Install Golang
         run: |
-          apk add alpine-keys
-          apk add golang
+          sudo apt-get update
+          sudo apt-get install -y golang
 
 
       - name: Install OSV Scanner
