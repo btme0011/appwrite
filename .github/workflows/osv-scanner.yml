@@ -15,6 +15,6 @@ jobs:
       - name: Scan for Vulnerabilities
         run: |
           docker run --rm -v $PWD:/app composer sh -c \
-          "apt-get update && apt-get install -y golang && \
+          "apk add golang && \
           go install github.com/google/osv-scanner/cmd/osv-scanner@latest && \
           osv-scanner -r /app/../../."
