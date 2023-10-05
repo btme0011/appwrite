@@ -4,11 +4,11 @@ on:
   push:
 
 jobs:
-  build:
+  akhil:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Set up Go
         uses: actions/setup-go@v4
@@ -20,6 +20,3 @@ jobs:
 
       - name: Scan for Vulnerabilities
         run: osv-scanner -r ../../.
-
-      - name: Report Vulnerabilities
-        run: osv-scanner report
