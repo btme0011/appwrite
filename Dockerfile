@@ -17,6 +17,7 @@ FROM --platform=$BUILDPLATFORM node:16.14.2-alpine3.15 as node
 COPY app/console /usr/local/src/console
 
 WORKDIR /usr/local/src/console
+RUN ls
 
 ARG VITE_GA_PROJECT
 ARG VITE_CONSOLE_MODE
